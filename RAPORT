@@ -1,0 +1,36 @@
+|  Krzysztof Gogolewski   |
+|  nr ind. 291538         |
+|  Asembler: Zadanie 2    | 
+|_________________________|
+
+1. Uwagi wstępne
+        Niestety sposób w jaki rozwiązałem zadanie 1. nie nadawał się do korzystania z instrukcji SSE
+Wynikało to głównie z tego, że nie czytałem danych wierszami, a kolumnami. Przez co instrukcje 
+zbierające dane do wektorów nie miały sensownego zastosowania.
+Rozwiązanie zadania 2. oparłem na tradycyjnym podejściu do problemu:
+    -- Dla każdej komórki oblicz sumę komórek sąsiadujących, a następnie podejmij decyzję. --
+Chciałbym jeszcze nadmienić, że w moim rozwiązaniu zadania pierwszego wkradł się swego rodzaju chochlik. 
+W pliku runda.asm, linia 138, 
+było: read rsi, rax, _SZER
+winno być : read rsi, r12, _SZER
+Błąd był dość dyskretny (objawia się przy pewnych działaniach na ostatniej kolumnie planszy) i niestety przeoczyłem go.
+Choć nie wpływa on na czas wykonania, który w tym zadaniu porównujemy, 
+uznałem że wypada zaznaczyć jego wystąpienie, o ile już nie został wykryty.
+
+
+2. Wyniki działania
+        Przykładowe wykonania programu i osiągniete czasy:
+
+> ./gra 500 < tests/test1000.in > tests/test1000.out
+    wersja 1: Asembler execution: 3950(ms)
+    wersja 2: Asembler execution: 2850(ms)
+
+> ./gra 10000 < tests/test100.in > /dev/null
+    wersja 1: Asembler execution: 710(ms)
+    wersja 2: Asembler execution: 640(ms)
+
+> ./gra 2500 < tests/test1000.in > /dev/null
+    wersja 1: Asembler execution: 18330(ms)
+    wersja 2: Asembler execution: 14660(ms)
+
+W ogólności wersja druga implementowanej gry w życie ma przyspieszenie na poziomie 0.25 względem wersji pierwszej.
